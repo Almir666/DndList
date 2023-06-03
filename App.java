@@ -7,11 +7,13 @@ public class App {
     public ArrayDeque<Characters> Del_hero(ArrayDeque<Characters> List, String name) {
         ArrayDeque<Characters> SecondList = new ArrayDeque<>();
         for (int i = 0; i < List.size(); i++) {
-            if (!List.peekFirst().getName().equals(name)) {
-                SecondList.add(List.pollFirst());
-            } else {
-                List.pollFirst();
-            }
+            if (List.peekFirst() != null) {    
+                if (!List.peekFirst().getName().equals(name)) {
+                    SecondList.add(List.pollFirst());
+                } else {
+                    List.pollFirst();
+                }
+            }    
         }
         return SecondList;
     }
@@ -47,8 +49,9 @@ public class App {
                         case "1":
                         System.out.println("Имя персонажа: ");
                         String keyHero = in.next();
-                            Del_hero(ListBattle, keyHero);
-                            Del_hero(SecondList, keyHero);
+                            ListBattle = Del_hero(ListBattle, keyHero);
+                            SecondList = Del_hero(SecondList, keyHero);
+                            size_deque = ListBattle.size() + SecondList.size();
                             break;
                         case "2":
                             Add_hero(ListBattle);
