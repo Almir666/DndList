@@ -22,33 +22,28 @@ public class App {
         return ListBattle;
     }
 
-    public ArrayDeque<Characters> Clear_List(ArrayDeque<Characters> List) {
-        for (int i = 0; i < List.size() + 1; i++) {
-            List.pollFirst();
-        }
-        return List;
+    public ArrayDeque<Characters> Add_hero(ArrayDeque<Characters> ListBattle, Characters pers) {
+        ListBattle.addLast(ListBattle.pollFirst());
+        ListBattle.addFirst(pers);
+        return ListBattle;
     }
 
-    public ArrayDeque<Characters> Add_hero(ArrayDeque<Characters> List) {
-        return null;
-    }
-
-    public void start(ArrayDeque<Characters> ListBattle) {
+    public void Battle(ArrayDeque<Characters> ListBattle) {
         System.out.println("Бой начался!");
         Scanner in = new Scanner(System.in);
         while (true) {
             System.out.println("Ход: " + ListBattle.peekFirst().getName());
             System.out.println("Для следующего хода нажмите: 1 ");
             System.out.println("Другое меню: 0 ");
-            String key = in.next();
-            switch (key) {
+            String step = in.next();
+            switch (step) {
                 case "1":
                     ListBattle.addLast(ListBattle.pollFirst());
                     break;
                 case "0":
                     System.out.println("Убрать персонажа: 1\nДобавить персонажа: 2\nВыход: 0");
-                    String key2 = in.next();
-                    switch (key2) {
+                    String menu = in.next();
+                    switch (menu) {
                         case "0":
                             in.close();
                             return;
@@ -58,7 +53,13 @@ public class App {
                             ListBattle = Del_hero(ListBattle, keyHero);
                             break;
                         case "2":
-                            Add_hero(ListBattle);
+                            System.out.println("Введите имя персонажа");
+                            String Pers_name = in.next();
+                            System.out.println("Введите колличесто HP");
+                            String Pers_hp = in.next();
+                            int Hp = Integer.parseInt(Pers_hp);
+                            Characters Pers = new Characters(Pers_name, Hp);
+                            Add_hero(ListBattle, Pers);
                             break;
                     }
                     break;

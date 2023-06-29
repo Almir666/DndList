@@ -16,6 +16,6 @@ public class Main {
         PersList.add(Mob2);
 
         App action = new App();
-        action.start(PersList);
+        action.Battle(PersList);
     }
 }
